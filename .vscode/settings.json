@@ -1,0 +1,28 @@
+{
+  "dart.enableSdkFormatter": true,
+  "dart.lineLength": 100,
+  "dart.checkForSdkUpdates": false,
+  "dart.showInspectorNotificationsForWidgetErrors": false,
+  "dart.analysisServer": "legacy",
+  "dart.allowAnalytics": false,
+  "dart.useFrameworkSdkForAnalysis": true,
+  "search.exclude": {
+    "**/.fvm": true
+  },
+  "files.watcherExclude": {
+    "**/.fvm": true
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.autoIndent": "full",
+  "editor.formatOnType": true,
+  "editor.formatOnSave": false,
+  "editor.formatOnEnter": true,
+  "[dart]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.formatOnType": true,
+    "editor.formatOnSave": false
+  }
+}

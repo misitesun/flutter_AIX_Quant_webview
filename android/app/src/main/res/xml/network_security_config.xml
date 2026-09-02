@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- 允许所有明文流量 -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <!-- 信任系统预装的CA证书 -->
+            <certificates src="system" />
+            <!-- 信任用户添加的CA证书 -->
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+    <!-- 特定域名的配置 -->
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- 添加您的域名 -->
+        <domain includeSubdomains="true">chat.redoneweb3.com</domain>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config> 
