@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
                   footerTriggerDistance: 150, // 触发加载的距离
                   child: GetMaterialApp(
                     debugShowCheckedModeBanner: false,
-                    title: 'XSmartPay',
+                    title: 'AIX-Quant',
 
                     // 主题
                     theme: theme,

@@ -9,6 +9,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:XSmartPay/common/index.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 
 class WebviewController extends GetxController {
@@ -24,7 +25,9 @@ class WebviewController extends GetxController {
   String type = '';
   // 钱包地址
   String address = '';
-  dynamic data; 
+  dynamic data;
+  bool _isOpeningXSmartPay = false;
+  bool _isOpeningTransactionRecord = false;
 
   @override
   void onReady() {
@@ -112,7 +115,17 @@ class WebviewController extends GetxController {
       try {
         data = jsonDecode(message);
         print('解析H5消息: $data');
-        
+
+        if (data != null && data['type'] == 'openTransactionRecord') {
+          await _openTransactionRecord(data['url']);
+          return;
+        }
+
+        if (data != null && data['type'] == 'openXSmartPay') {
+          await _openXSmartPay();
+          return;
+        }
+
         if (data != null && data['token'] != null) {
           await Storage().setString('token', data['token']);
           // Storage().setString('token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjAxNTIwMzgsIm5iZiI6MTc2MDE1MjAzNywiZXhwIjoxNzYwNzU2ODM4LCJ1aWQiOjMxMjQzMywidGhpcmRfcGFydHlfdWlkIjozMjM2NjB9.utAG83WsK9Qb5zjy1KFclma0Q_BA4aKagnWmnTtFbyo');
@@ -128,6 +141,46 @@ class WebviewController extends GetxController {
         Loading.toast('处理消息失败: $e');
       }
     });
+  }
+
+  Future<void> _openTransactionRecord(dynamic rawUrl) async {
+    if (_isOpeningTransactionRecord) return;
+
+    final targetUrl = rawUrl is String ? rawUrl.trim() : '';
+    final targetUri = Uri.tryParse(targetUrl);
+    if (targetUri == null ||
+        targetUri.host.isEmpty ||
+        !(targetUri.isScheme('http') || targetUri.isScheme('https'))) {
+      Loading.toast('无效的交易记录链接');
+      return;
+    }
+
+    _isOpeningTransactionRecord = true;
+    try {
+      final opened = await launchUrl(
+        targetUri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!opened) {
+        Loading.toast('无法打开交易记录链接');
+      }
+    } finally {
+      _isOpeningTransactionRecord = false;
+    }
+  }
+
+  Future<void> _openXSmartPay() async {
+    if (_isOpeningXSmartPay) return;
+
+    _isOpeningXSmartPay = true;
+    try {
+      final route = Get.toNamed('/xsmartpayPage');
+      if (route != null) {
+        await route;
+      }
+    } finally {
+      _isOpeningXSmartPay = false;
+    }
   }
 
   // 保存二维码

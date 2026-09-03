@@ -1,5 +1,6 @@
 import 'package:XSmartPay/pages/start/index.dart';
 import 'package:XSmartPay/pages/webview/index.dart';
+import 'package:XSmartPay/pages/xsmartpay/index.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,10 @@ class RoutePages {
     GetPage(
       name: '/webviewPage', //
       page: () => const WebViewPage(),
+    ),
+    GetPage(
+      name: '/xsmartpayPage',
+      page: () => const XSmartPayWebViewPage(),
     ),
   ];
 }

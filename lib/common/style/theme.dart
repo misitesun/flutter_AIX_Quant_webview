@@ -9,7 +9,7 @@ import 'colors.dart';
 class AppTheme {
   /////////////////////////////////////////////////
   /// 共享颜色（亮暗主题相同）
-  static const primary = Color(0xffEFCD80); // 主题色
+  static const primary = Color(0xff1261F3); // 主题色
   static const color999 = Color(0xFF999999); // 灰色
   static const color666 = Color(0xFF666666); // 灰色
   static const color6C7481 = Color(0xff6C7481); // 灰色
@@ -19,12 +19,12 @@ class AppTheme {
 
   // 动态颜色
   static Color get pageBgColor => Get.isDarkMode
-      ? const Color(0xff040404)
+      ? const Color(0xff000308)
       : const Color(0xFFf4f4f4); // 页面背景
   static Color get blockBgColor =>
       Get.isDarkMode ? const Color(0xff1F261F) : const Color(0xFFffffff); // 块背景
   static Color get navBgColor => Get.isDarkMode
-      ? const Color(0xff040404)
+      ? const Color(0xff000308)
       : const Color(0xFFffffff); // 导航背景
   static Color get colorfff =>
       Get.isDarkMode ? const Color(0xFFFFFFFF) : const Color(0xFF000000); // 白色

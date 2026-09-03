@@ -9,6 +9,6 @@ class Constants {
   static const storageLanguageCode = 'language_code';
 
   // h5Url
-  static const h5Url = 'https://www.xsmartpay.com';
-  // static const h5Url = 'http://192.168.110.22:5173/h5/';
+  static const h5Url = 'http://192.168.110.102:8080/aix/';
+  static const xspayUrl = 'https://www.xsmartpay.com';
 }
